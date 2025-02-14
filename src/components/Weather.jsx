@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const Weather = (props) => {
   const [weather, setWeather] = useState(null);
@@ -8,6 +8,8 @@ const Weather = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const location = useLocation();
 
   const fetchCity = async () => {
     setIsLoading(true);
@@ -37,13 +39,13 @@ const Weather = (props) => {
     }
   };
 
-  const fetchWeather = async (lat, lon) => {
+  const fetchWeather = async (lat, lon, language) => {
     setIsLoading(true);
 
     try {
       console.log("fetching data...");
       const resp = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=it&appid=3827a398648912c6a365cb04b12db29a`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${language}&appid=3827a398648912c6a365cb04b12db29a`
       );
       if (resp.ok) {
         const weather = await resp.json();
@@ -71,24 +73,23 @@ const Weather = (props) => {
 
   useEffect(() => {
     if (city) {
-      fetchWeather(city.lat, city.lon);
+      fetchWeather(city.lat, city.lon, props.language);
     }
-  }, [city]);
+  }, [city, props.language]);
 
   return (
     <Card>
       {isLoading && <p>Caricamento...</p>}
-      {hasError && <p>Errore: {errorMessage}</p>}
       <Card.Body>
         {city ? (
           <div>
             <Card.Text className="m-0">{city.state}</Card.Text>
-            <Card.Title className="fs-1 fw-bold pb-2">{city.name.toUpperCase()}</Card.Title>
+            <Card.Title className="fs-2 fw-bold pb-2">{city.name.toUpperCase()}</Card.Title>
           </div>
         ) : (
           <p className="fs-2 pb-2">Città non disponibile</p>
         )}
-        <h3 className="fs-4 fw-bold">
+        <h3 className="fs-5 fw-bold">
           Temperatura:
           {weather ? (
             <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(2)}°C</span>
@@ -97,7 +98,7 @@ const Weather = (props) => {
           )}
         </h3>
 
-        <h3 className="fs-4 fw-bold">
+        <h3 className="fs-5 fw-bold">
           Umidità:
           {weather ? (
             <span className="fw-normal"> {weather.main.humidity} %</span>
@@ -107,7 +108,7 @@ const Weather = (props) => {
         </h3>
 
         {weather ? (
-          <h3 className="fs-4 fw-bold">
+          <h3 className="fs-5 fw-bold pt-0">
             Tempo:{" "}
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
@@ -120,12 +121,10 @@ const Weather = (props) => {
           <span className="fw-normal">Tempo non disponibile</span>
         )}
 
-        {weather ? (
+        {location.pathname === "/" && weather && (
           <Link to={`/nextdays/${weather.id}`}>
             <Button variant="primary">Prossimi giorni</Button>
           </Link>
-        ) : (
-          <Button variant="primary">Prossimi giorni</Button>
         )}
       </Card.Body>
     </Card>

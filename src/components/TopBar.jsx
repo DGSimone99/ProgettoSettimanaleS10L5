@@ -1,27 +1,32 @@
+import { Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router";
 
-function TopBar() {
+function TopBar(props) {
   return (
-    <Container fluid className="px-0">
-      <Navbar expand="lg" className="bg-body-tertiary">
+    <Container fluid className="px-0 mb-4 fs-4">
+      <Navbar expand="lg">
         <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+          <Navbar.Brand>
+            <img src="https://m.media-amazon.com/images/I/41cFKQCLncL.png" alt="logo" width={50}></img>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="#home">Meteo</Nav.Link>
-              <NavDropdown title="Città" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown>
-
-              <NavDropdown title="Lingua" id="basic-nav-dropdown"></NavDropdown>
+            <Nav className="d-flex w-100">
+              <Link to="/" className="nav-link  text-white">
+                Meteo
+              </Link>
+              <Form.Select
+                aria-label="Default select example"
+                className="text-black bg-transparent border-black ms-auto w-25"
+                onChange={(e) => props.setLanguage(e.target.value)}
+              >
+                <option value="it">Italiano</option>
+                <option value="en">Inglese</option>
+                <option value="fr">Francese</option>
+              </Form.Select>
             </Nav>
           </Navbar.Collapse>
         </Container>

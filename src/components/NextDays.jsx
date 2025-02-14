@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router";
+import Weather from "./Weather";
 
-const NextDays = () => {
+const NextDays = (props) => {
   const [nextDays, setNextDays] = useState([]);
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ const NextDays = () => {
     try {
       console.log("fetching data...");
       const resp = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?id=${params.city}&lang=it&appid=3827a398648912c6a365cb04b12db29a`
+        `https://api.openweathermap.org/data/2.5/forecast?id=${params.city}&lang=${props.language}&appid=3827a398648912c6a365cb04b12db29a`
       );
       if (resp.ok) {
         const data = await resp.json();
@@ -54,21 +55,32 @@ const NextDays = () => {
   return (
     <Container className="mb-4" xs={2} md={5}>
       <h1>{city}</h1>
-      <h4>Meteo dei prossimi giorni</h4>
+      <h3>Meteo attuale</h3>
+      <Weather cityName={city} language={props.language} />
+
+      <h3 className="mt-4">Meteo dei prossimi giorni</h3>
       <Row>
         {nextDays.map((weather) => {
           return (
             <Col key={weather.dt} className="mb-4">
-              <Card border="primary">
-                <Card.Header>{days[new Date(weather.dt_txt).getDay()]}</Card.Header>
+              <Card>
+                <Card.Header className="fw-bold fs-3">{days[new Date(weather.dt_txt).getDay()]}</Card.Header>
                 <Card.Body>
-                  <p className="fw-normal"> {(weather.main.temp - 273.15).toFixed(2)}°C</p>
+                  <p className="fw-bold mb-1">
+                    Temperatura:
+                    <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(2)}°C</span>
+                  </p>
+
+                  <p className="fw-bold my-0">
+                    Umidità:
+                    <span className="fw-normal"> {weather.main.humidity} %</span>
+                  </p>
                   <p className="fw-bold">
                     Tempo:{" "}
                     <img
                       src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                       alt={weather.weather[0].description}
-                      width={50}
+                      width={35}
                     ></img>
                     <span className="fw-normal">{weather.weather[0].description}</span>
                   </p>

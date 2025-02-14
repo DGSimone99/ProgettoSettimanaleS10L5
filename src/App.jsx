@@ -8,13 +8,18 @@ import WeatherCities from "./components/WeatherCities";
 import NextDays from "./components/NextDays";
 
 function App() {
+  const [language, setLanguage] = useState("");
+  /* Funziona ma i testi come Temperatura, Umidità ecc. gli ho scritti io quindi ovviamente non cambiano, ma ci ho pensato tardi */
+
+  console.log(language);
+
   return (
     <Container fluid className="px-0">
       <BrowserRouter>
-        <TopBar />
+        <TopBar setLanguage={setLanguage} />
         <Routes>
-          <Route path="/" element={<WeatherCities />} />
-          <Route path="/nextdays/:city" title="Prossimi giorni" element={<NextDays />} />
+          <Route path="/" element={<WeatherCities language={language} />} />
+          <Route path="/nextdays/:city" title="Prossimi giorni" element={<NextDays language={language} />} />
         </Routes>
       </BrowserRouter>
     </Container>
