@@ -19,14 +19,14 @@ const WeatherCities = (props) => {
         />
       </Form.Group>
       {searchQuery !== "" ? (
-        <Weather cityName={searchQuery} />
+        <Weather cityName={searchQuery} className="bglarge" />
       ) : (
         <Alert variant="success">
           <Alert.Heading className="text-center">Cerca una città</Alert.Heading>
         </Alert>
       )}
 
-      <Row className="gy-4">
+      <Row className="gy-4 mt-2">
         {cities.map((city, index) => (
           <Col xs={12} md={6} lg={4} key={index}>
             <Weather cityName={city} language={props.language} />

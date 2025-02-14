@@ -56,13 +56,13 @@ const NextDays = (props) => {
     <Container className="mb-4" xs={2} md={5}>
       <h1>{city}</h1>
       <h3>Meteo attuale</h3>
-      <Weather cityName={city} language={props.language} />
+      <Weather cityName={city} language={props.language} className="bglarge" />
 
       <h3 className="mt-4">Meteo dei prossimi giorni</h3>
       <Row>
         {nextDays.map((weather) => {
           return (
-            <Col key={weather.dt} className="mb-4">
+            <Col key={weather.dt} className="mb-4" md={12} lg="auto">
               <Card>
                 <Card.Header className="fw-bold fs-3">{days[new Date(weather.dt_txt).getDay()]}</Card.Header>
                 <Card.Body>
