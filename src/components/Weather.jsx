@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router";
 
 const Weather = (props) => {
   const [weather, setWeather] = useState(null);
@@ -42,7 +43,7 @@ const Weather = (props) => {
     try {
       console.log("fetching data...");
       const resp = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${props.language}&appid=3827a398648912c6a365cb04b12db29a`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=it&appid=3827a398648912c6a365cb04b12db29a`
       );
       if (resp.ok) {
         const weather = await resp.json();
@@ -119,7 +120,13 @@ const Weather = (props) => {
           <span className="fw-normal">Tempo non disponibile</span>
         )}
 
-        <Button variant="primary">Prossimi giorni</Button>
+        {weather ? (
+          <Link to={`/nextdays/${weather.id}`}>
+            <Button variant="primary">Prossimi giorni</Button>
+          </Link>
+        ) : (
+          <Button variant="primary">Prossimi giorni</Button>
+        )}
       </Card.Body>
     </Card>
   );
