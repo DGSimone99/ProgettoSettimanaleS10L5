@@ -270,10 +270,10 @@ const Weather = (props) => {
       </Card.Body>
     </Card>
   ) : (
-    <Alert variant="danger" className="text-center fs-1">
-      {props.language === "it" && <h2>Città non trovata</h2>}
-      {props.language === "en" && <h2>City not found</h2>}
-      {props.language === "fr" && <h2>Ville non trouvée</h2>}
+    <Alert variant="danger" className="text-center">
+      {props.language === "it" && <h2 className="fs-4">Città non trovata</h2>}
+      {props.language === "en" && <h2 className="fs-4">City not found</h2>}
+      {props.language === "fr" && <h2 className="fs-4">Ville non trouvée</h2>}
     </Alert>
   );
 };

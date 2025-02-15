@@ -32,7 +32,7 @@ function App() {
         <TopBar setLanguage={setLanguage} language={language} flag={flag} />
         <div className="container bg-main py-4 rounded-4 shadow">
           <Routes>
-            <Route path="/" element={<WeatherCities language={language} title="Meteo" />} />
+            <Route path="/" title="Meteo" element={<WeatherCities language={language} />} />
             <Route path="/nextdays/:city" title="Prossimi giorni" element={<NextDays language={language} />} />
             <Route
               path="/comingSoon"
@@ -42,7 +42,7 @@ function App() {
             <Route path="*" title="Pagina non Trovata" element={<NotFound language={language} />} />
           </Routes>
         </div>
-        <Footer />
+        <Footer language={language} />
       </BrowserRouter>
     </Container>
   );
