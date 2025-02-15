@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
-import { Link, useLocation } from "react-router";
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { Link, NavLink, useLocation } from "react-router";
+import Clock from "./Clock";
 
 const Weather = (props) => {
   const [weather, setWeather] = useState(null);
@@ -78,54 +79,107 @@ const Weather = (props) => {
   }, [city, props.language]);
 
   return (
-    <Card>
+    <Card className="p-2 pt-1">
       {isLoading && <p>Caricamento...</p>}
       <Card.Body>
         {city ? (
           <div>
             <Card.Text className="m-0">{city.state}</Card.Text>
-            <Card.Title className="fs-2 fw-bold pb-2">{city.name.toUpperCase()}</Card.Title>
+            <div className="d-flex justify-content-between align-items-center">
+              <Card.Title className="fs-1 fw-bold mb-0 text-shadow">{city.name.toUpperCase()}</Card.Title>
+              {location.pathname !== "/" && <Clock />}
+            </div>
           </div>
         ) : (
-          <p className="fs-2 pb-2">Città non disponibile</p>
+          <p className="fs-2">Città non disponibile</p>
         )}
-        <h3 className="fs-5 fw-bold">
-          Temperatura:
-          {weather ? (
-            <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(2)}°C</span>
-          ) : (
-            <span className="fw-normal">Temperatura non disponibile</span>
-          )}
-        </h3>
-
-        <h3 className="fs-5 fw-bold">
-          Umidità:
-          {weather ? (
-            <span className="fw-normal"> {weather.main.humidity} %</span>
-          ) : (
-            <span className="fw-normal">Umidità non disponibile</span>
-          )}
-        </h3>
-
         {weather ? (
-          <h3 className="fs-5 fw-bold pt-0">
+          <h3 className="fs-4 fw-bold pt-0 mb-3 d-flex align-items-center">
             Tempo:{" "}
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt={weather.weather[0].description}
-              width={50}
+              width={45}
             ></img>
-            <span className="fw-normal">{weather.weather[0].description}</span>
+            <span className="fw-normal">{weather.weather[0].description.toUpperCase()}</span>
           </h3>
         ) : (
           <span className="fw-normal">Tempo non disponibile</span>
         )}
+        <Row className="d-flex justify-content-between">
+          <Col>
+            <h3 className="fs-5 fw-bold">
+              Temperatura:
+              {weather ? (
+                <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(1)}°C</span>
+              ) : (
+                <span className="fw-normal">Temperatura non disponibile</span>
+              )}
+            </h3>
 
-        {location.pathname === "/" && weather && (
-          <Link to={`/nextdays/${weather.id}`}>
-            <Button variant="primary">Prossimi giorni</Button>
-          </Link>
-        )}
+            <h3 className="fs-5 fw-bold">
+              Umidità:
+              {weather ? (
+                <span className="fw-normal"> {weather.main.humidity}%</span>
+              ) : (
+                <span className="fw-normal">Umidità non disponibile</span>
+              )}
+            </h3>
+
+            {location.pathname === "/" && weather && (
+              <Button
+                as={Link}
+                to={`/nextdays/${weather.id}`}
+                className="ms-auto d-block bg-transparent border border-white nextDaysBtn mt-4"
+              >
+                Prossimi giorni
+              </Button>
+            )}
+          </Col>
+
+          {location.pathname !== "/" && (
+            <Col className="text-center">
+              <h3 className="fs-5 fw-bold">
+                Nuvolosità:
+                {weather ? (
+                  <span className="fw-normal"> {weather.clouds.all}%</span>
+                ) : (
+                  <span className="fw-normal">Nuvolosità non disponibile</span>
+                )}
+              </h3>
+
+              <h3 className="fs-5 fw-bold">
+                Vento:
+                {weather ? (
+                  <span className="fw-normal"> {weather.wind.speed} m/s</span>
+                ) : (
+                  <span className="fw-normal">Vento non disponibile</span>
+                )}
+              </h3>
+            </Col>
+          )}
+          {location.pathname !== "/" && (
+            <Col className="text-end">
+              <h3 className="fs-5 fw-bold">
+                Longitudine:
+                {weather ? (
+                  <span className="fw-normal"> {weather.coord.lon}</span>
+                ) : (
+                  <span className="fw-normal">Longitudine non disponibile</span>
+                )}
+              </h3>
+
+              <h3 className="fs-5 fw-bold">
+                Latitudine:
+                {weather ? (
+                  <span className="fw-normal"> {weather.coord.lat}</span>
+                ) : (
+                  <span className="fw-normal">Latitudine non disponibile</span>
+                )}
+              </h3>
+            </Col>
+          )}
+        </Row>
       </Card.Body>
     </Card>
   );

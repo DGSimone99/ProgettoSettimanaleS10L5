@@ -59,31 +59,24 @@ const NextDays = (props) => {
       <Weather cityName={city} language={props.language} className="bglarge" />
 
       <h3 className="mt-4">Meteo dei prossimi giorni</h3>
-      <Row>
+      <Row className="d-flex justify-content-between">
         {nextDays.map((weather) => {
           return (
-            <Col key={weather.dt} className="mb-4" md={12} lg="auto">
-              <Card>
-                <Card.Header className="fw-bold fs-3">{days[new Date(weather.dt_txt).getDay()]}</Card.Header>
+            <Col key={weather.dt} className="mb-4 cardDays" md={12} lg={2}>
+              <Card className="text-center">
+                <Card.Header className="fw-bold fs-3 text-shadow">
+                  {days[new Date(weather.dt_txt).getDay()].toUpperCase()}
+                </Card.Header>
                 <Card.Body>
-                  <p className="fw-bold mb-1">
-                    Temperatura:
-                    <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(2)}°C</span>
-                  </p>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                    alt={weather.weather[0].description}
+                    width={100}
+                  ></img>
+                  <p className="fw-bold mb-0 fs-2">{(weather.main.temp - 273.15).toFixed(1)}°</p>
 
-                  <p className="fw-bold my-0">
-                    Umidità:
-                    <span className="fw-normal"> {weather.main.humidity} %</span>
-                  </p>
-                  <p className="fw-bold">
-                    Tempo:{" "}
-                    <img
-                      src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                      alt={weather.weather[0].description}
-                      width={35}
-                    ></img>
-                    <span className="fw-normal">{weather.weather[0].description}</span>
-                  </p>
+                  <p className="fw-bold my-0 fs-3"> {weather.main.humidity} %</p>
+                  <p className="fw-bold">{weather.weather[0].description.toUpperCase()}</p>
                 </Card.Body>
               </Card>
             </Col>

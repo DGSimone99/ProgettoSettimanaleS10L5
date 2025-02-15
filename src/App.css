@@ -1,13 +1,45 @@
 body {
-  background-color: #f6f7f9;
+  background: url();
 }
 .navbar {
-  background-color: #00a8e8;
+  background: rgba(0, 95, 153, 0.9);
 }
 
 .card {
-  background: url("https://as2.ftcdn.net/v2/jpg/03/18/66/61/1000_F_318666170_Wru9kEh3nN3qTfX07AWqbHZ0T3jVeF50.jpg")
-    center;
-  background-size: cover;
+  background: linear-gradient(180deg, #8ac1ed 62%, rgb(0, 121, 196) 100%);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.cardDays {
+  width: 20%;
+  &:hover {
+    transform: scale(110%);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nextDaysBtn {
+  text-decoration: none !important;
+  &:hover {
+    background-color: white !important;
+    color: black;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .cardDays {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cardDays {
+    width: 100%;
+  }
 }

@@ -8,8 +8,7 @@ import WeatherCities from "./components/WeatherCities";
 import NextDays from "./components/NextDays";
 
 function App() {
-  const [language, setLanguage] = useState("");
-  /* Funziona ma i testi come Temperatura, Umidità ecc. gli ho scritti io quindi ovviamente non cambiano, ma ci ho pensato tardi */
+  const [language, setLanguage] = useState("it");
 
   console.log(language);
 
