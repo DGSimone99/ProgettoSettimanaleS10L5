@@ -91,42 +91,65 @@ const Weather = (props) => {
             </div>
           </div>
         ) : (
-          <p className="fs-2">Città non disponibile</p>
+          <div>
+            {props.language === "it" && <p className="fs-2">Città non disponibile</p>}
+            {props.language === "en" && <p className="fs-2">City not available</p>}
+            {props.language === "fr" && <p className="fs-2">Ville non disponible</p>}
+          </div>
         )}
-        {props.language === "it" && <p>Meteo</p>}
-        {props.language === "en" && <p>Weather</p>}
-        {props.language === "fr" && <p>Météo</p>}
+
         {weather ? (
-          <div className=" d-flex align-items-center">
-            <h3 className="fs-4 fw-bold pt-0 mb-3">Tempo: </h3>
+          <div className=" d-flex align-items-center mb-2">
+            {props.language === "it" && <h3 className="fs-3 fw-bold pt-0">Tempo: </h3>}
+            {props.language === "en" && <h3 className="fs-3 fw-bold pt-0">Weather: </h3>}
+            {props.language === "fr" && <h3 className="fs-3 fw-bold pt-0">Météo: </h3>}
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt={weather.weather[0].description}
               width={45}
             ></img>
-            <span className="fw-normal">{weather.weather[0].description.toUpperCase()}</span>
+            <span className="fw-normal fs-4">{weather.weather[0].description.toUpperCase()}</span>
           </div>
         ) : (
-          <span className="fw-normal">Tempo non disponibile</span>
+          <div>
+            {props.language === "it" && <span className="fw-normal">Tempo non disponibile</span>}
+            {props.language === "en" && <span className="fw-normal">Weather not available</span>}
+            {props.language === "fr" && <span className="fw-normal">Météo non disponible</span>}
+          </div>
         )}
+
         <Row className="d-flex justify-content-between">
           <Col>
-            <h3 className="fs-5 fw-bold">
-              Temperatura:
+            <div className=" d-flex align-items-center mb-2">
+              {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Temperatura:</h3>}
+              {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Temperature:</h3>}
+              {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Température:</h3>}
               {weather ? (
-                <span className="fw-normal"> {(weather.main.temp - 273.15).toFixed(1)}°C</span>
+                <span className="fw-normal fs-4 ms-2">{(weather.main.temp - 273.15).toFixed(1)}°C</span>
               ) : (
-                <span className="fw-normal">Temperatura non disponibile</span>
+                <div>
+                  {props.language === "it" && <span className="fw-normal fs-4 ms-2">Temperatura non disponibile</span>}
+                  {props.language === "en" && <span className="fw-normal fs-4 ms-2">Temperature not available</span>}
+                  {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Température non disponible</span>}
+                </div>
               )}
-            </h3>
+            </div>
 
             <h3 className="fs-5 fw-bold">
-              Umidità:
-              {weather ? (
-                <span className="fw-normal"> {weather.main.humidity}%</span>
-              ) : (
-                <span className="fw-normal">Umidità non disponibile</span>
-              )}
+              <div className=" d-flex align-items-center mb-2">
+                {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Umidità:</h3>}
+                {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Humidity:</h3>}
+                {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Humidité:</h3>}
+                {weather ? (
+                  <span className="fw-normal fs-4 ms-2"> {weather.main.humidity}%</span>
+                ) : (
+                  <div>
+                    {props.language === "it" && <span className="fw-normal fs-4 ms-2">Umidità non disponibile</span>}
+                    {props.language === "en" && <span className="fw-normal fs-4 ms-2">Humidity not available</span>}
+                    {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Humidité non disponible</span>}
+                  </div>
+                )}
+              </div>
             </h3>
 
             {location.pathname === "/" && weather && (
@@ -141,45 +164,71 @@ const Weather = (props) => {
           </Col>
 
           {location.pathname !== "/" && (
-            <Col className="text-center">
-              <h3 className="fs-5 fw-bold">
-                Nuvolosità:
+            <Col>
+              <div className=" d-flex align-items-center mb-2 justify-content-center">
+                {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Nuvolosità:</h3>}
+                {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Cloudiness:</h3>}
+                {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Nébulosité:</h3>}
                 {weather ? (
-                  <span className="fw-normal"> {weather.clouds.all}%</span>
+                  <span className="fw-normal fs-4 ms-2"> {weather.clouds.all}%</span>
                 ) : (
-                  <span className="fw-normal">Nuvolosità non disponibile</span>
+                  <div>
+                    {props.language === "it" && <span className="fw-normal fs-4 ms-2">Umidità non disponibile</span>}
+                    {props.language === "en" && <span className="fw-normal fs-4 ms-2">Cloudiness not available</span>}
+                    {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Nébulosité non disponible</span>}
+                  </div>
                 )}
-              </h3>
+              </div>
 
-              <h3 className="fs-5 fw-bold">
-                Vento:
+              <div className=" d-flex align-items-center mb-2 justify-content-center">
+                {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Vento:</h3>}
+                {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Wind:</h3>}
+                {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Vent:</h3>}
                 {weather ? (
-                  <span className="fw-normal"> {weather.wind.speed} m/s</span>
+                  <span className="fw-normal fs-4 ms-2"> {weather.wind.speed} m/s</span>
                 ) : (
-                  <span className="fw-normal">Vento non disponibile</span>
+                  <div>
+                    {props.language === "it" && <span className="fw-normal fs-4 ms-2">Vento non disponibile</span>}
+                    {props.language === "en" && <span className="fw-normal fs-4 ms-2">Wind not available</span>}
+                    {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Vent non disponible</span>}
+                  </div>
                 )}
-              </h3>
+              </div>
             </Col>
           )}
           {location.pathname !== "/" && (
             <Col className="text-end">
-              <h3 className="fs-5 fw-bold">
-                Longitudine:
+              <div className=" d-flex align-items-center mb-2 justify-content-end">
+                {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Longitudine:</h3>}
+                {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Longitude:</h3>}
+                {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Longitude:</h3>}
                 {weather ? (
-                  <span className="fw-normal"> {weather.coord.lon}</span>
+                  <span className="fw-normal fs-4 ms-2"> {weather.coord.lon}</span>
                 ) : (
-                  <span className="fw-normal">Longitudine non disponibile</span>
+                  <div>
+                    {props.language === "it" && (
+                      <span className="fw-normal fs-4 ms-2">Longitudine non disponibile</span>
+                    )}
+                    {props.language === "en" && <span className="fw-normal fs-4 ms-2">Longitude not available</span>}
+                    {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Longitude non disponible</span>}
+                  </div>
                 )}
-              </h3>
+              </div>
 
-              <h3 className="fs-5 fw-bold">
-                Latitudine:
+              <div className=" d-flex align-items-center mb-2 justify-content-end">
+                {props.language === "it" && <h3 className="fw-bold my-0 fs-4">Latitudine:</h3>}
+                {props.language === "en" && <h3 className="fw-bold my-0 fs-4">Latitude:</h3>}
+                {props.language === "fr" && <h3 className="fw-bold my-0 fs-4">Latitude:</h3>}
                 {weather ? (
-                  <span className="fw-normal"> {weather.coord.lat}</span>
+                  <span className="fw-normal fs-4 ms-2"> {weather.coord.lat}</span>
                 ) : (
-                  <span className="fw-normal">Latitudine non disponibile</span>
+                  <div>
+                    {props.language === "it" && <span className="fw-normal fs-4 ms-2">Latitudine non disponibile</span>}
+                    {props.language === "en" && <span className="fw-normal fs-4 ms-2">Latitude not available</span>}
+                    {props.language === "fr" && <span className="fw-normal fs-4 ms-2">Latitude non disponible</span>}
+                  </div>
                 )}
-              </h3>
+              </div>
             </Col>
           )}
         </Row>
