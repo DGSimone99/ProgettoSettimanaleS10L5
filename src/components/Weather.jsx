@@ -79,7 +79,7 @@ const Weather = (props) => {
   }, [city, props.language]);
 
   return (
-    <Card className="p-2 pt-1">
+    <Card className="p-2 pt-1 border-0">
       {isLoading && <p>Caricamento...</p>}
       <Card.Body>
         {city ? (
@@ -93,16 +93,19 @@ const Weather = (props) => {
         ) : (
           <p className="fs-2">Città non disponibile</p>
         )}
+        {props.language === "it" && <p>Meteo</p>}
+        {props.language === "en" && <p>Weather</p>}
+        {props.language === "fr" && <p>Météo</p>}
         {weather ? (
-          <h3 className="fs-4 fw-bold pt-0 mb-3 d-flex align-items-center">
-            Tempo:{" "}
+          <div className=" d-flex align-items-center">
+            <h3 className="fs-4 fw-bold pt-0 mb-3">Tempo: </h3>
             <img
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt={weather.weather[0].description}
               width={45}
             ></img>
             <span className="fw-normal">{weather.weather[0].description.toUpperCase()}</span>
-          </h3>
+          </div>
         ) : (
           <span className="fw-normal">Tempo non disponibile</span>
         )}

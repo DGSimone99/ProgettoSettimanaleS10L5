@@ -1,12 +1,14 @@
 body {
-  background: url();
+  background: url("https://img.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_1017-25501.jpg?t=st=1739633911~exp=1739637511~hmac=4f19ee59f5f11fbf88cb4bd46982fbbce0de260274c3998dbd45f909f2fc474b&w=1380")
+    center no-repeat;
+  background-size: cover;
 }
 .navbar {
   background: rgba(0, 95, 153, 0.9);
 }
 
 .card {
-  background: linear-gradient(180deg, #8ac1ed 62%, rgb(0, 121, 196) 100%);
+  background: linear-gradient(180deg, #6fb7ff 62%, rgb(0, 97, 158) 100%);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   color: white;
 }
@@ -24,11 +26,20 @@ body {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+.daysHeader,
+.bg-lang {
+  background-color: #3398e3;
+}
+
+.bg-main {
+  background-color: rgba(255, 255, 255, 0.146);
+}
+
 .nextDaysBtn {
   text-decoration: none !important;
   &:hover {
     background-color: white !important;
-    color: black;
+    color: #0464a1;
   }
 }
 

@@ -54,17 +54,21 @@ const NextDays = (props) => {
 
   return (
     <Container className="mb-4" xs={2} md={5}>
-      <h1>{city}</h1>
-      <h3>Meteo attuale</h3>
+      <h1 className="text-white">{city}</h1>
+      {props.language === "it" && <h3 className="text-white fs-2">Meteo</h3>}
+      {props.language === "en" && <h3 className="text-white fs-2">Current weather</h3>}
+      {props.language === "fr" && <h3 className="text-white fs-2">Météo actuelle</h3>}
       <Weather cityName={city} language={props.language} className="bglarge" />
 
-      <h3 className="mt-4">Meteo dei prossimi giorni</h3>
+      {props.language === "it" && <h3 className="text-white fs-2 mt-4">Meteo dei prossimi giorni</h3>}
+      {props.language === "en" && <h3 className="text-white fs-2 mt-4">Weather for the next days</h3>}
+      {props.language === "fr" && <h3 className="text-white fs-2 mt-4">Météo pour les prochains jours</h3>}
       <Row className="d-flex justify-content-between">
         {nextDays.map((weather) => {
           return (
             <Col key={weather.dt} className="mb-4 cardDays" md={12} lg={2}>
-              <Card className="text-center">
-                <Card.Header className="fw-bold fs-3 text-shadow">
+              <Card className="text-center border-0">
+                <Card.Header className="fw-bold fs-3 text-shadow daysHeader">
                   {days[new Date(weather.dt_txt).getDay()].toUpperCase()}
                 </Card.Header>
                 <Card.Body>
@@ -75,7 +79,7 @@ const NextDays = (props) => {
                   ></img>
                   <p className="fw-bold mb-0 fs-2">{(weather.main.temp - 273.15).toFixed(1)}°</p>
 
-                  <p className="fw-bold my-0 fs-3"> {weather.main.humidity} %</p>
+                  <p className="fw-bold my-0 fs-3"> {weather.main.humidity}%</p>
                   <p className="fw-bold">{weather.weather[0].description.toUpperCase()}</p>
                 </Card.Body>
               </Card>
