@@ -46,11 +46,15 @@ const NextDays = (props) => {
     }
   };
 
-  const days = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
+  const days = {
+    it: ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"],
+    en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    fr: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+  };
 
   useEffect(() => {
     fetchDays();
-  }, []);
+  }, [props.language]);
 
   return (
     <Container className="mb-4" xs={2} md={5}>
@@ -69,7 +73,7 @@ const NextDays = (props) => {
             <Col key={weather.dt} className="mb-4 cardDays" md={12} lg={2}>
               <Card className="text-center border-0">
                 <Card.Header className="fw-bold fs-3 text-shadow daysHeader">
-                  {days[new Date(weather.dt_txt).getDay()].toUpperCase()}
+                  {days[props.language][new Date(weather.dt_txt).getDay()].toUpperCase()}
                 </Card.Header>
                 <Card.Body>
                   <img

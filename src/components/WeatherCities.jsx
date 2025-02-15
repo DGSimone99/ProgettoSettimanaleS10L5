@@ -5,24 +5,30 @@ import { Alert, Col, Container, Form, Row } from "react-bootstrap";
 const WeatherCities = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const cities = ["Milano", "Genova", "Venezia", "Roma", "Napoli", "Bari"];
-  /*  */
+  const cities = ["Milano", "Genova", "Pavia", "Roma", "Napoli", "Taranto"];
+
+  const search = {
+    it: "Cerca una città",
+    en: "Search for a city",
+    fr: "Rechercher une ville",
+  };
+
   return (
     <Container>
       <Form.Group>
         <Form.Control
           type="search"
-          placeholder="Cerca una località"
+          placeholder={search[props.language]}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="mb-2"
         />
       </Form.Group>
       {searchQuery !== "" ? (
-        <Weather cityName={searchQuery} className="bglarge" />
+        <Weather cityName={searchQuery} language={props.language} className="bglarge" />
       ) : (
         <Alert variant="success">
-          <Alert.Heading className="text-center">Cerca una città</Alert.Heading>
+          <Alert.Heading className="text-center">{search[props.language]}</Alert.Heading>
         </Alert>
       )}
 

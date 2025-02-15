@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Row } from "react-bootstrap";
 import { Link, NavLink, useLocation } from "react-router";
 import Clock from "./Clock";
 
@@ -78,15 +78,28 @@ const Weather = (props) => {
     }
   }, [city, props.language]);
 
-  return (
+  return city ? (
     <Card className="p-2 pt-1 border-0">
-      {isLoading && <p>Caricamento...</p>}
+      {props.language === "it" && isLoading && <p>Caricamento...</p>}
+      {props.language === "en" && isLoading && <p>Loading...</p>}
+      {props.language === "fr" && isLoading && <p>Chargement...</p>}
       <Card.Body>
         {city ? (
           <div>
-            <Card.Text className="m-0">{city.state}</Card.Text>
+            <Card.Text className="m-0">{city.country}</Card.Text>
             <div className="d-flex justify-content-between align-items-center">
-              <Card.Title className="fs-1 fw-bold mb-0 text-shadow">{city.name.toUpperCase()}</Card.Title>
+              {city ? (
+                <Card.Title className="fs-1 fw-bold mb-0 text-shadow text-uppercase">
+                  {city.local_names?.[props.language] ?? city.name}
+                </Card.Title>
+              ) : (
+                <div>
+                  {props.language === "it" && <span className="fs-1 fw-bold mb-0 text">Città non disponibile</span>}
+                  {props.language === "en" && <span className="fs-1 fw-bold mb-0 text">City not available</span>}
+                  {props.language === "fr" && <span className="fs-1 fw-bold mb-0 text">Ville non disponible</span>}
+                </div>
+              )}
+
               {location.pathname !== "/" && <Clock />}
             </div>
           </div>
@@ -153,13 +166,35 @@ const Weather = (props) => {
             </h3>
 
             {location.pathname === "/" && weather && (
-              <Button
-                as={Link}
-                to={`/nextdays/${weather.id}`}
-                className="ms-auto d-block bg-transparent border border-white nextDaysBtn mt-4"
-              >
-                Prossimi giorni
-              </Button>
+              <div>
+                {props.language === "it" && (
+                  <Button
+                    as={Link}
+                    to={`/nextdays/${weather.id}`}
+                    className="ms-auto d-block bg-transparent border border-white nextDaysBtn mt-4"
+                  >
+                    Prossimi giorni
+                  </Button>
+                )}
+                {props.language === "en" && (
+                  <Button
+                    as={Link}
+                    to={`/nextdays/${weather.id}`}
+                    className="ms-auto d-block bg-transparent border border-white nextDaysBtn mt-4"
+                  >
+                    Next days
+                  </Button>
+                )}
+                {props.language === "fr" && (
+                  <Button
+                    as={Link}
+                    to={`/nextdays/${weather.id}`}
+                    className="ms-auto d-block bg-transparent border border-white nextDaysBtn mt-4"
+                  >
+                    Les prochains jours
+                  </Button>
+                )}
+              </div>
             )}
           </Col>
 
@@ -234,6 +269,12 @@ const Weather = (props) => {
         </Row>
       </Card.Body>
     </Card>
+  ) : (
+    <Alert variant="danger" className="text-center fs-1">
+      {props.language === "it" && <h2>Città non trovata</h2>}
+      {props.language === "en" && <h2>City not found</h2>}
+      {props.language === "fr" && <h2>Ville non trouvée</h2>}
+    </Alert>
   );
 };
 

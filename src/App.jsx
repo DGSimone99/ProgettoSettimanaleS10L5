@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import WeatherCities from "./components/WeatherCities";
 import NextDays from "./components/NextDays";
+import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
+import ComingSoon from "./components/ComingSoon";
 
 function App() {
   const [language, setLanguage] = useState("it");
@@ -26,13 +29,20 @@ function App() {
   return (
     <Container fluid className="px-0">
       <BrowserRouter>
-        <TopBar setLanguage={setLanguage} flag={flag} />
+        <TopBar setLanguage={setLanguage} language={language} flag={flag} />
         <div className="container bg-main py-4 rounded-4 shadow">
           <Routes>
-            <Route path="/" element={<WeatherCities language={language} />} />
+            <Route path="/" element={<WeatherCities language={language} title="Meteo" />} />
             <Route path="/nextdays/:city" title="Prossimi giorni" element={<NextDays language={language} />} />
+            <Route
+              path="/comingSoon"
+              title="Pagina al momento non disponibile"
+              element={<ComingSoon language={language} />}
+            />
+            <Route path="*" title="Pagina non Trovata" element={<NotFound language={language} />} />
           </Routes>
         </div>
+        <Footer />
       </BrowserRouter>
     </Container>
   );

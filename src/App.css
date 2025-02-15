@@ -2,9 +2,21 @@ body {
   background: url("https://img.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_1017-25501.jpg?t=st=1739633911~exp=1739637511~hmac=4f19ee59f5f11fbf88cb4bd46982fbbce0de260274c3998dbd45f909f2fc474b&w=1380")
     center no-repeat;
   background-size: cover;
+  height: 100vh;
 }
 .navbar {
   background: rgba(0, 95, 153, 0.9);
+}
+
+.navbarLink {
+  color: rgba(255, 255, 255, 0.575);
+  &:hover {
+    transform: scale(110%);
+    color: white;
+  }
+  &:focus {
+    color: white;
+  }
 }
 
 .card {
@@ -40,6 +52,21 @@ body {
   &:hover {
     background-color: white !important;
     color: #0464a1;
+  }
+}
+
+.notFound {
+  height: 70vh;
+  h1 {
+    font-size: 4rem;
+  }
+  .btn {
+    font-size: 2rem;
+    background-color: ;
+    &:hover {
+      background-color: white !important;
+      color: #0464a1;
+    }
   }
 }
 
