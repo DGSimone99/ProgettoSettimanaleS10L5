@@ -57,7 +57,7 @@ const NextDays = (props) => {
   }, [props.language]);
 
   return (
-    <Container className="mb-4" xs={2} md={5}>
+    <Container className="mb-4 px-1" xs={2} md={5}>
       <h1 className="text-white">{city}</h1>
       {props.language === "it" && <h3 className="text-white fs-2">Meteo</h3>}
       {props.language === "en" && <h3 className="text-white fs-2">Current weather</h3>}
@@ -72,7 +72,7 @@ const NextDays = (props) => {
           return (
             <Col key={weather.dt} className="mb-4 cardDays" md={12} lg={2}>
               <Card className="text-center border-0">
-                <Card.Header className="fw-bold fs-3 text-shadow daysHeader">
+                <Card.Header className="fw-bold fs-4 text-shadow daysHeader">
                   {days[props.language][new Date(weather.dt_txt).getDay()].toUpperCase()}
                 </Card.Header>
                 <Card.Body>
