@@ -12,7 +12,7 @@ function TopBar(props) {
           <Navbar.Brand>
             <img src="https://m.media-amazon.com/images/I/41cFKQCLncL.png" alt="logo" width={50}></img>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-white" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="d-flex w-100 align-items-center">
               <Link to="/" className="nav-link  text-white navbarLink">
@@ -32,7 +32,7 @@ function TopBar(props) {
                 {props.language === "en" && <h3 className="fs-4 pt-0">News</h3>}
                 {props.language === "fr" && <h3 className="fs-4 pt-0">Nouvelles</h3>}
               </Link>
-              <div className="d-flex ms-auto w-25 align-items-center">
+              <div className="d-flex ms-auto align-items-center">
                 <img src={`../src/assets/${props.flag}.png`} className="ms-auto me-4" width={40} height={40}></img>
                 <Form.Select
                   aria-label="Default select example"

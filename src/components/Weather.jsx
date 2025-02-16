@@ -80,9 +80,9 @@ const Weather = (props) => {
 
   return city ? (
     <Card className="p-2 pt-1 border-0">
-      {props.language === "it" && isLoading && <p>Caricamento...</p>}
+      {/*  {props.language === "it" && isLoading && <p>Caricamento...</p>}
       {props.language === "en" && isLoading && <p>Loading...</p>}
-      {props.language === "fr" && isLoading && <p>Chargement...</p>}
+      {props.language === "fr" && isLoading && <p>Chargement...</p>} */}
       <Card.Body>
         {city ? (
           <div>

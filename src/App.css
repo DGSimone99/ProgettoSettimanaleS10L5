@@ -56,6 +56,20 @@ body {
   }
 }
 
+.myCityBtn {
+  background-color: #1d89d1;
+  &:hover {
+    background-color: #66a7ea !important;
+    border: solid white !important;
+    padding-bottom: 0.2em;
+    padding-top: 0.2em;
+  }
+  &:active {
+    transform: scale(95%);
+    transition: transform 0.1s;
+  }
+}
+
 .notFound {
   height: 70vh;
   h1 {
